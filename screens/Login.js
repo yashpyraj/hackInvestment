@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View, KeyboardAvoidingView, ImageBackground } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Input, Center, Image, Icon, Heading } from 'native-base'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { signInWithPopup, onAuthStateChanged, signInWithEmailAndPassword, FacebookAuthProvider, getRedirectResult } from 'firebase/auth';
+import { auth } from '../firebase';
 const Login = ({ navigation }) => {
     const [show, setShow] = useState(false);
     const [email, setEmail] = useState("")
@@ -24,6 +25,18 @@ const Login = ({ navigation }) => {
                 // ..
             });
     }
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            console.log(user)
+            if (user) {
+                navigation.replace('Home')
+            }
+
+        });
+
+        return unsubscribe
+    }, [])
     return (
 
         <KeyboardAvoidingView style={styles.container}>
@@ -33,6 +46,7 @@ const Login = ({ navigation }) => {
                     <Text>Welcome Back!!</Text>
                     <Input mt='5'
                         borderColor='black'
+                        h='10'
                         placeholderTextColor='black'
                         onChangeText={(text) => setEmail(text)}
                         w={{
@@ -42,6 +56,7 @@ const Login = ({ navigation }) => {
                     <Input
                         onChangeText={(text) => setPassword(text)}
                         borderColor='black'
+                        h='10'
                         placeholderTextColor='black'
                         value={password}
                         w={{

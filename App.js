@@ -20,15 +20,7 @@ import Registor from './screens/Registor';
 
 const Stack = createNativeStackNavigator();
 
-const globalStyele = {
-  headerStyle: {
-    backgroundGradient: "vertical",
-    backgroundGradientTop: "#333333",
-    backgroundGradientBottom: "#666666"
-  },
-  headerTitleStyle: { color: 'white', alignSelf: 'center' },
-  headerTintColor: 'white',
-};
+
 
 const App = () => {
   return (

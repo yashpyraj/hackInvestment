@@ -1,6 +1,7 @@
 import React, { useState, useLayoutEffect } from 'react'
 import { Center, Image, Input, Icon, Button, KeyboardAvoidingView, Heading } from 'native-base';
 import {
+    ImageBackground,
     SafeAreaView,
     ScrollView,
     StatusBar,
@@ -22,6 +23,7 @@ const RegistorScreen = ({ navigation }) => {
     const [password, setPassword] = useState('')
     const [imageUrl, setImageUrl] = useState('')
     const [show, setShow] = useState(false);
+    const image = { uri: "https://www.w3schools.com/css/img_lights.jpg" };
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -31,7 +33,7 @@ const RegistorScreen = ({ navigation }) => {
     const registor = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed in 
+                // Signed in dd
                 console.log(userCredential)
                 const user = userCredential.user
                 updateProfile(user, {
@@ -50,59 +52,64 @@ const RegistorScreen = ({ navigation }) => {
             });
     }
 
-    // const test = () => {
-    //     sendEmailVerification(auth.currentUser)
-    //         .then(() => {
-    //             console.log('Email verification sent!')
-    //         })
-    //         .catch((error) => {
-    //             console.log(error)
-    //             console.log(error.message)
 
-
-    //             // ..
-    //         });
-    // }
 
     return (
         <KeyboardAvoidingView style={styles.container}>
+            <ImageBackground source={image} blurRadius={5} resizeMode="cover" style={{ flex: 1 }}>
 
-            <Center flex={1}>
-                <Heading>Create a Account </Heading>
-                <Input mt='5'
-                    onChangeText={(text) => setfullName(text)}
-                    w={{
-                        base: "75%",
-                        md: "25%"
-                    }} placeholder="Full Name" value={fullName} />
-                <Input mt='5'
-                    onChangeText={(text) => setEmail(text)}
-                    w={{
-                        base: "75%",
-                        md: "25%"
-                    }} placeholder="Email" value={email} />
-                <Input
-                    onChangeText={(text) => setPassword(text)}
-                    value={password}
-                    w={{
-                        base: "75%",
-                        md: "25%"
-                    }} type={show ? "text" : "password"} mt='5' InputRightElement={<Icon as={<MaterialIcons name={show ? "visibility" : "visibility-off"} />} size={5} mr="2" color="muted.400" onPress={() => setShow(!show)} />} placeholder="Password" />
-                <Input mt='5'
-                    onChangeText={(text) => setImageUrl(text)}
-                    onSubmitEditing={registor}
-                    w={{
-                        base: "75%",
-                        md: "25%"
-                    }} placeholder="Image url (Optional) " value={imageUrl} />
-                <Button
-                    onPress={registor}
+                <Center flex={1}>
+                    <Heading>Create a Account </Heading>
+                    <Input mt='5'
+                        h='10'
+                        borderColor='black'
+                        placeholderTextColor='black'
+                        onChangeText={(text) => setfullName(text)}
+                        w={{
+                            base: "75%",
+                            md: "25%"
+                        }} placeholder="Full Name" value={fullName} />
+                    <Input mt='5'
+                        h='10'
 
-                    mt='5' name='Press' w={{
-                        base: "55%",
-                        md: "25%"
-                    }} > Registor</Button>
-            </Center>
+                        borderColor='black'
+                        placeholderTextColor='black'
+                        onChangeText={(text) => setEmail(text)}
+                        w={{
+                            base: "75%",
+                            md: "25%"
+                        }} placeholder="Email" value={email} />
+                    <Input
+                        h='10'
+                        borderColor='black'
+                        placeholderTextColor='black'
+                        onChangeText={(text) => setPassword(text)}
+                        value={password}
+                        w={{
+                            base: "75%",
+                            md: "25%"
+                        }} type={show ? "text" : "password"} mt='5' InputRightElement={<Icon as={<MaterialIcons name={show ? "visibility" : "visibility-off"} />} size={5} mr="2" color="black" onPress={() => setShow(!show)} />} placeholder="Password" />
+                    <Input mt='5'
+                        borderColor='black'
+                        h='10'
+
+                        placeholderTextColor='black'
+                        onChangeText={(text) => setImageUrl(text)}
+                        onSubmitEditing={registor}
+                        w={{
+                            base: "75%",
+                            md: "25%"
+                        }} placeholder="Image url (Optional) " value={imageUrl} />
+                    <Button
+                        onPress={registor}
+                        backgroundColor="#1AA37A"
+                        _text={{ color: 'black' }}
+                        mt='5' name='Press' w={{
+                            base: "55%",
+                            md: "25%"
+                        }} > Registor</Button>
+                </Center>
+            </ImageBackground>
         </KeyboardAvoidingView>
 
     )
