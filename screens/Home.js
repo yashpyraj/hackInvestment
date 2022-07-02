@@ -1,40 +1,60 @@
-import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, ImageBackground } from 'react-native'
 import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { Avatar } from 'native-base'
+import { Avatar, Button, FlatList, Heading, HStack, Pressable } from 'native-base'
 
 import { auth, db } from '../firebase'
 import { getAuth, signOut } from "firebase/auth";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { collection, getDocs } from "firebase/firestore";
-import { doc, onSnapshot } from "firebase/firestore";
-
+import { collection, getDocs, doc, onSnapshot, addDoc } from "firebase/firestore";
+import moment from 'moment';
+import LinearGradient from 'react-native-linear-gradient';
 
 const Home = ({ navigation }) => {
-    const [investments, setInvestments] = useState([])
+    const [months, setMonths] = useState([])
+    const [found, setFound] = useState(true)
 
 
     useEffect(() => {
-        const chatRef = collection(db, "investments")
-        const unsub = onSnapshot(chatRef, (snap) => {
-            let investments = []
+        let month = moment().format("MMMM");
+
+        const monthRef = collection(db, "month")
+        onSnapshot(monthRef, (snap) => {
+            let months = []
             snap.docs.forEach((doc) => {
-                investments.push({ ...doc.data(), id: doc.id })
+                months.push({ ...doc.data(), id: doc.id })
             })
+            setMonths(months)
 
-
-            setInvestments(investments)
-
+            let found = months.some(el => el.month === month);
+            setFound(found)
         })
 
+        if (!found) {
+            createMonth()
+        }
 
-        return unsub
-    }, [])
+    }, [found])
 
 
 
 
+    const createMonth = async () => {
 
+        try {
+            const docRef = await addDoc(collection(db, "month"), {
+                month: moment().format("MMMM"),
+                year: moment().format("YYYY"),
+                day: moment().format("D")
+
+            });
+            console.log("month with ID: ", docRef.id);
+
+        } catch (e) {
+            console.error("Error adding month: ", e);
+        }
+
+    }
 
     const userSignOut = () => {
         signOut(auth).then(() => {
@@ -63,19 +83,44 @@ const Home = ({ navigation }) => {
             ),
         });
     }, []);
+
+
+    const onPress = () => { }
+    const renderItem = ({ item }) => {
+
+        const image = { uri: "https://www.w3schools.com/css/img_lights.jpg" };
+
+        return (
+            <Pressable onPress={onPress} p={5} m={2} backgroundColor='green.50' borderRadius={20} style={{
+                shadowColor: '#1AA37A',
+                shadowOffset: { width: 0, height: 1 },
+                shadowOpacity: 0.8,
+                shadowRadius: 2,
+                elevation: 5
+            }}>
+
+
+                <Heading>{item.month} month</Heading>
+                <Text>Report</Text>
+                <MaterialIcons />
+
+
+            </Pressable>
+        );
+    };
+
+
+
     return (
-        <SafeAreaView>
-            <ScrollView>
-                {console.log(investments)}
-                {console.log(auth)}
-
-                {investments.map(({ id, chatName }) => (
-                    <CustomListItem key={id} chatName={chatName} id={id} />
-                ))}
-
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#CAF6BF' }} >
+            <FlatList
+                mt={2}
+                data={months}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.id}
+            />
 
 
-            </ScrollView>
         </SafeAreaView>
     )
 }

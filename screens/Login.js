@@ -4,6 +4,7 @@ import { Button, Input, Center, Image, Icon, Heading } from 'native-base'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { signInWithPopup, onAuthStateChanged, signInWithEmailAndPassword, FacebookAuthProvider, getRedirectResult } from 'firebase/auth';
 import { auth } from '../firebase';
+
 const Login = ({ navigation }) => {
     const [show, setShow] = useState(false);
     const [email, setEmail] = useState("")
@@ -82,8 +83,6 @@ const Login = ({ navigation }) => {
                             base: "55%",
                             md: "25%"
                         }} > Registor</Button>
-
-
                 </Center>
             </ImageBackground>
         </KeyboardAvoidingView>
