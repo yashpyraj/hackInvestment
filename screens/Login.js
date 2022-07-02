@@ -5,6 +5,8 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { signInWithPopup, onAuthStateChanged, signInWithEmailAndPassword, FacebookAuthProvider, getRedirectResult } from 'firebase/auth';
 import { auth } from '../firebase';
 
+
+
 const Login = ({ navigation }) => {
     const [show, setShow] = useState(false);
     const [email, setEmail] = useState("")
@@ -77,7 +79,7 @@ const Login = ({ navigation }) => {
                     <Button
                         borderColor="black"
                         _text={{ color: 'black' }}
-                        onPress={() => navigation.navigate('Registor')}
+                        onPress={() => navigation.navigate('Report')}
                         mt='5' name='Press' variant={'outline'}
                         w={{
                             base: "55%",

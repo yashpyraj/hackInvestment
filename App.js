@@ -17,6 +17,8 @@ import { NativeBaseProvider } from 'native-base';
 import Home from './screens/Home';
 import Login from './screens/Login';
 import Registor from './screens/Registor';
+import Report from './screens/Report';
+import Salary from './components/salary'
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +32,9 @@ const App = () => {
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Login" options={{ headerShown: false }} component={Login} />
           <Stack.Screen name="Registor" component={Registor} />
+          <Stack.Screen name="Report" component={Report} />
+          <Stack.Screen name="Salary" options={{ headerShown: false }} component={Salary} />
+
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
