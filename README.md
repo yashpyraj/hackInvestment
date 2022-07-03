@@ -1,6 +1,6 @@
 # MONEY MANAGEMENT APP
 
-This has a monthly money tracking system and a new month component will create every new month
+This has a monthly money tracking system and every new month new component will create every new month
 
 ## REGISTER AND LOGIN
 
