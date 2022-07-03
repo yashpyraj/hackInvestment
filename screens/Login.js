@@ -79,7 +79,7 @@ const Login = ({ navigation }) => {
                     <Button
                         borderColor="black"
                         _text={{ color: 'black' }}
-                        onPress={() => navigation.navigate('Report')}
+                        onPress={() => navigation.navigate('Registor')}
                         mt='5' name='Press' variant={'outline'}
                         w={{
                             base: "55%",

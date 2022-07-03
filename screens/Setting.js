@@ -4,7 +4,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Center, HStack, Text, Button, VStack } from 'native-base';
 import { auth, db } from '../firebase'
 import { getAuth, signOut } from "firebase/auth";
-
+import LottieView from 'lottie-react-native';
+import lotti from '../components/setting.json'
 const Setting = ({ navigation }) => {
     const [salary, setSalary] = useState({})
 
@@ -44,11 +45,18 @@ const Setting = ({ navigation }) => {
             <Center mt={70} justifyContent={'space-around'} p={5}>
                 <Text m={5} fontSize={'xl'}>Your monthly income is</Text>
                 <Text m={2} fontSize={'4xl'}>{salary.salary}</Text>
+
                 <Button m={5} w={20} h={10} size="sm"
                     onPress={() => navigation.navigate('Salary')}
                     backgroundColor={'#1AA37A'}
 
                 >EDIT</Button>
+                <LottieView
+
+                    style={{ width: 200, height: 200 }}
+                    source={require("../components/setting.json")}
+
+                />
 
 
             </Center>

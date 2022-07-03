@@ -23,7 +23,6 @@ const Home = ({ navigation }) => {
         getList()
         let month = moment().format("MMMM");
         const monthRef = collection(db, "month")
-        console.log(salary)
         onSnapshot(monthRef, (snap) => {
             let months = []
             snap.docs.forEach((doc) => {
