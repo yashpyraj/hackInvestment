@@ -19,7 +19,8 @@ import Login from './screens/Login';
 import Registor from './screens/Registor';
 import Report from './screens/Report';
 import Salary from './components/salary'
-
+import Setting from './screens/Setting'
+import AddExpense from './screens/AddExpense';
 const Stack = createNativeStackNavigator();
 
 
@@ -33,6 +34,8 @@ const App = () => {
           <Stack.Screen name="Login" options={{ headerShown: false }} component={Login} />
           <Stack.Screen name="Registor" component={Registor} />
           <Stack.Screen name="Report" component={Report} />
+          <Stack.Screen name="Setting" component={Setting} />
+          <Stack.Screen name="AddExpense" component={AddExpense} />
           <Stack.Screen name="Salary" options={{ headerShown: false }} component={Salary} />
 
         </Stack.Navigator>

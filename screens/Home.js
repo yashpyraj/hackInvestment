@@ -17,7 +17,6 @@ const Home = ({ navigation }) => {
     const [found, setFound] = useState(true)
     const [salary, setSalary] = useState({})
     const isFocused = useIsFocused()
-    const [loading, setLoading] = useState(false)
 
 
     useEffect(() => {
@@ -107,6 +106,14 @@ const Home = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
             ),
+            headerRight: () => (<View style={{ margin: 0 }}>
+                <TouchableOpacity activeOpacity={0.5}
+                    onPress={() => navigation.navigate('Setting')}
+
+                >
+                    <MaterialIcons name='settings' size={25} />
+                </TouchableOpacity>
+            </View>),
         });
     }, []);
 
@@ -143,54 +150,12 @@ const Home = ({ navigation }) => {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#CAF6BF' }} >
-
-
-            {/* 
-                <Center
-                    mt={40}
-                    p={5} m={2} backgroundColor={'green.50'} borderRadius={20} style={{
-                        shadowColor: '#1AA37A',
-                        shadowOffset: { width: 0, height: 1 },
-                        shadowOpacity: 0.8,
-                        shadowRadius: 2,
-                        elevation: 5
-                    }}>
-                    <Text fontSize='lg'>Pls enter your monthly income</Text>
-
-
-
-                    <Input mt='5'
-                        borderColor='green.800'
-                        h='10'
-                        keyboardType='numeric'
-                        placeholderTextColor='black'
-                        onChangeText={(text) => setSalary(text)}
-                        // onEndEditing={(text) => setSalary(text)}
-                        w={{
-                            base: "75%",
-                            md: "25%"
-                        }} size={5} placeholder="Income..." value={salary} />
-                    <Button mt='5' backgroundColor="#1AA37A"
-                        _text={{ color: 'black' }}
-                        name='Press' onPress={submitSalary} w={{
-                            base: "55%",
-                            md: "25%"
-
-                        }}> Submit</Button>
-                </Center> */}
-
-
-
             <FlatList
                 mt={2}
                 data={months}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id}
             />
-
-
-
-
 
 
         </SafeAreaView>
